@@ -53,7 +53,19 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
+	switch ($_SERVER['HTTP_HOST']) {
+		case 'ci-foro.com':
+			$env = 'development';
+			break;
+		
+		default:
+			$env = 'production';
+			break;
+	}
+	//define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', $env);
+
 
 /*
  *---------------------------------------------------------------
@@ -66,7 +78,7 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		error_reporting(-1);//// Notificar todos los errores de PHP
 		ini_set('display_errors', 1);
 	break;
 
@@ -97,7 +109,7 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$system_path = 'system';
+	$system_path = '../system';
 
 /*
  *---------------------------------------------------------------
@@ -114,7 +126,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = 'application';
+	$application_folder = '../application';
 
 /*
  *---------------------------------------------------------------
