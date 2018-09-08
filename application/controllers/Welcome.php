@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Netcarver\Textile;
+
 class Welcome extends CI_Controller {
 
 	/**
@@ -21,5 +23,13 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('welcome_message');
+
+		$parser = new Textile\Parser();
+
+		$string = 'h1. Welcome' . PHP_EOL . PHP_EOL;
+		$string .= '* List item' . PHP_EOL;
+		$string .= '* Another list item' . PHP_EOL;
+
+		echo $parser->TextileThis($string);
 	}
 }
