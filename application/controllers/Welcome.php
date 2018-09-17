@@ -40,6 +40,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$user = $this->ion_auth->user()->row();
+		dump($user);
+		$this->output->enable_profiler(ENVIRONMENT == 'development');
 		$data = array('subview' => 'homepage');
 		$this->load->view('layouts/layout', $data);
 
